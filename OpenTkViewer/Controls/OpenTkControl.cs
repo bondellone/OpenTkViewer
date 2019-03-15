@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.Integration;
+using OpenTkViewer.Models;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
+using System.Linq;
+using OpenTkViewer.Models.Enums;
 
-namespace OpenTkViewer
+namespace OpenTkViewer.Controls
 {
     public class OpenTkControl : WindowsFormsHost
     {
@@ -93,11 +95,11 @@ namespace OpenTkViewer
             foreach (var edgesLineStrip in triangleMeshAnalyzer.Edges)
             {
                 GL.Begin(PrimitiveType.LineStrip);
-                foreach (var vector in edgesLineStrip.Vertices.Select(x => x.Position.Position))
+                foreach (var vector in edgesLineStrip.Elements.Select(x => x.Position.Position))
                     GL.Vertex3(vector);
 
                 if (edgesLineStrip.Type == ContourType.Closed)
-                    GL.Vertex3(edgesLineStrip.Vertices.First.Value.Position.Position);
+                    GL.Vertex3(edgesLineStrip.Elements.First.Value.Position.Position);
                 GL.End();
             }
             GL.LineWidth(1);

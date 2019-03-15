@@ -2,6 +2,8 @@
 using System.Globalization;
 using System.IO;
 using System.Threading;
+using OpenTkViewer.Models;
+using OpenTkViewer.Models.Enums;
 using OpenTK;
 
 namespace OpenTkViewer
@@ -13,7 +15,7 @@ namespace OpenTkViewer
 
         public static TriangleMeshAnalyzer Load()
         {
-            var fileName = @"C:\STLmodels\Деталь0.STL";
+            var fileName = @"C:\Users\petro\Downloads\Models\Letter_A.stl";
             var triangleMesh = new TriangleMesh();
             using (Stream fileStream = File.OpenRead(fileName))
             {
@@ -48,36 +50,35 @@ namespace OpenTkViewer
                 stlStream.Position = 0;
                 var stlReader = new StreamReader(stlStream);
                 var vectorIndex = 0;
-                var vector0 = new Vector3d(0, 0, 0);
-                var vector1 = new Vector3d(0, 0, 0);
-                var vector2 = new Vector3d(0, 0, 0);
+                var normal = Vector3d.Zero;
+                var vector0 = Vector3d.Zero;
+                var vector1 = Vector3d.Zero;
+                var vector2 = Vector3d.Zero;
                 var line = stlReader.ReadLine();
 
                 while (line != null)
                 {
                     line = line.Trim();
+                    if (line.StartsWith("facet normal"))
+                        normal = Convert(line, "facet normal");
+
                     if (line.StartsWith("vertex"))
                     {
                         vectorIndex++;
                         switch (vectorIndex)
                         {
                             case 1:
-                                vector0 = Convert(line);
+                                vector0 = Convert(line, "vertex");
                                 break;
 
                             case 2:
-                                vector1 = Convert(line);
+                                vector1 = Convert(line, "vertex");
                                 break;
 
                             case 3:
-                                vector2 = Convert(line);
+                                vector2 = Convert(line, "vertex");
                                 if (!ViewerMath.Collinear(vector0, vector1, vector2))
-                                {
-                                    //IVertex vertex1 = meshFromStlFile.CreateVertex(vector0, CreateOption.CreateNew, SortOption.WillSortLater);
-                                    //IVertex vertex2 = meshFromStlFile.CreateVertex(vector1, CreateOption.CreateNew, SortOption.WillSortLater);
-                                    //IVertex vertex3 = meshFromStlFile.CreateVertex(vector2, CreateOption.CreateNew, SortOption.WillSortLater);
-                                    //meshFromStlFile.CreateFace(new IVertex[] { vertex1, vertex2, vertex3 }, CreateOption.CreateNew);
-                                }
+                                    triangleMesh.AddTriangle(vector0, vector1, vector2, normal);
                                 vectorIndex = 0;
                                 break;
                         }
@@ -118,25 +119,17 @@ namespace OpenTkViewer
                     currentPosition += 2; // skip the attribute
                     
                     if (!ViewerMath.Collinear(vector[1], vector[2], vector[3]))
-                    {
                         triangleMesh.AddTriangle(vector[1], vector[2], vector[3], vector[0]);
-
-                        //IVertex vertex1 = meshFromStlFile.CreateVertex(vector[0], CreateOption.CreateNew, SortOption.WillSortLater);
-                        //IVertex vertex2 = meshFromStlFile.CreateVertex(vector[1], CreateOption.CreateNew, SortOption.WillSortLater);
-                        //IVertex vertex3 = meshFromStlFile.CreateVertex(vector[2], CreateOption.CreateNew, SortOption.WillSortLater);
-                        //meshFromStlFile.CreateFace(new IVertex[] { vertex1, vertex2, vertex3 }, CreateOption.CreateNew);
-                    }
                 }
-                //uint numTriangles = System.BitConverter.ToSingle(fileContents, 80);
             }
             
             stlStream.Close();
         }
 
-        private static Vector3d Convert(string line)
+        private static Vector3d Convert(string line, string parameterName)
         {
             Vector3d vector0;
-            int currentPosition = "vertex".Length;
+            int currentPosition = parameterName.Length;
             string number = GetNumber(line, ref currentPosition);
             double.TryParse(number, style, culture, out vector0.X);
 
