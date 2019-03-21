@@ -61,18 +61,12 @@ namespace OpenTkViewer
 
         public Vector2d ScreenCenter { get; set; }
 
-        public Camera(double width, double height)
+        public Camera()
         {
-            this.width = width;
-            this.height = height;
-
             rotationMatrix = Matrix4d.Identity;
             translationMatrix = Matrix4d.Identity;
             rotationCenterMatrix = Matrix4d.Identity;
             ProjectionMatrix = Matrix4d.Identity;
-            //Scale = 0.03;
-            CalculateProjectionMatrix(width, height);
-            CalculateModelViewMatrix();
         }
 
         public void OnTransformChanged()
@@ -82,7 +76,7 @@ namespace OpenTkViewer
 
         public void CalculateProjectionMatrix(double newWidth, double newHeight)
         {
-            if (!(newWidth > 0) || !(newHeight > 0))
+            if (newWidth <0.001 || newHeight < 0.001)
                 return;
 
             width = newWidth;

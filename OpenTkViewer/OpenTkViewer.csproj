@@ -72,6 +72,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Interfaces\IVisualObject.cs" />
+    <Compile Include="Models\DrawHelper.cs" />
     <Compile Include="Models\ModelPrimitives\Edge3D.cs" />
     <Compile Include="Models\EdgeNormal.cs" />
     <Compile Include="Models\EdgesLineStrip.cs" />
@@ -83,10 +85,16 @@
     <Compile Include="Models\TriangleMeshAnalyzer.cs" />
     <Compile Include="Models\ModelPrimitives\Vertex3D.cs" />
     <Compile Include="Models\ModelPrimitives\VertexStorage.cs" />
+    <Compile Include="Models\VisualObjects\VisualModel.cs" />
     <Compile Include="OpenTkViewerBootstrapper.cs" />
     <Compile Include="StlReader.cs" />
     <Compile Include="Models\TriangleMesh.cs" />
+    <Compile Include="ViewerScene.cs" />
+    <Compile Include="ViewModels\SceneViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="Views\SceneView.xaml.cs">
+      <DependentUpon>SceneView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
@@ -95,6 +103,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Camera.cs" />
+    <Page Include="Views\SceneView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ShellView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

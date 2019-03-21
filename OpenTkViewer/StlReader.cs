@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using OpenTkViewer.Models;
-using OpenTkViewer.Models.Enums;
+using OpenTkViewer.Models.VisualObjects;
 using OpenTK;
 
 namespace OpenTkViewer
@@ -13,9 +14,8 @@ namespace OpenTkViewer
         private static NumberStyles style = NumberStyles.AllowDecimalPoint | NumberStyles.AllowExponent | NumberStyles.AllowLeadingSign;
         private static CultureInfo culture = CultureInfo.InvariantCulture;
 
-        public static TriangleMeshAnalyzer Load()
+        public static VisualModel Load(string fileName)
         {
-            var fileName = @"C:\Users\petro\Downloads\Models\Letter_A.stl";
             var triangleMesh = new TriangleMesh();
             using (Stream fileStream = File.OpenRead(fileName))
             {
@@ -24,7 +24,10 @@ namespace OpenTkViewer
 
             var triangleMeshAnalyzer = new TriangleMeshAnalyzer(triangleMesh);
             triangleMeshAnalyzer.ProcessTriangleMesh();
-            return triangleMeshAnalyzer;
+            return new VisualModel(
+                triangleMeshAnalyzer.Vertices.Values.ToList(), 
+                triangleMeshAnalyzer.Edges, 
+                triangleMeshAnalyzer.Triangles);
         }
 
         private static void ParseFileContents(Stream stlStream, ref TriangleMesh triangleMesh)

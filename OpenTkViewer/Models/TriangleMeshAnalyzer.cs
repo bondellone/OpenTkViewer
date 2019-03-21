@@ -22,7 +22,7 @@ namespace OpenTkViewer.Models
 
         private List<Edge3D> InternalEdges { get; }
 
-        public IEnumerable<EdgesLineStrip> Edges { get; private set; }
+        public List<EdgesLineStrip> Edges { get; private set; }
 
         public TriangleMeshAnalyzer(TriangleMesh triangleMesh)
         {
@@ -258,7 +258,7 @@ namespace OpenTkViewer.Models
                 endsStripAndEdgeEqual?.AppendToEnd(edge.Start, edge);
             }
 
-            Edges = edgesLineStrips.Values.SelectMany(x => x);
+            Edges = edgesLineStrips.Values.SelectMany(x => x).ToList();
         }
 
         private long GetEdgeKey(Edge3D edge)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using Caliburn.Micro;
+using OpenTkViewer.Controls;
 using OpenTkViewer.ViewModels;
 
 namespace OpenTkViewer
@@ -19,6 +20,10 @@ namespace OpenTkViewer
         {
             container = new SimpleContainer();
             container.Singleton<IWindowManager, WindowManager>();
+            container.Singleton<Camera>();
+            container.Singleton<OpenTkControl>();
+            container.Singleton<ViewerScene>();
+            container.Singleton<SceneViewModel>();
             container.PerRequest<ShellViewModel>();
             base.Configure();
         }
