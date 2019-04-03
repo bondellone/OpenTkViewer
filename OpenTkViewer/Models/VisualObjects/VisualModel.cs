@@ -8,6 +8,7 @@ namespace OpenTkViewer.Models.VisualObjects
 {
     public class VisualModel : IVisualObject
     {
+        private readonly BoundingBox boundingBox; 
         private readonly List<Vector3d> verticesVectors;
         private readonly List<Vector3d> edgesVectors;
         private readonly List<Vector3d> trianglesVectors;
@@ -19,7 +20,7 @@ namespace OpenTkViewer.Models.VisualObjects
         public IEnumerable<Vector3d> VerticesVectors => verticesVectors;
         public IEnumerable<Vector3d> EdgesVectors => edgesVectors;
         public IEnumerable<Vector3d> TrianglesVectors => trianglesVectors;
-
+        
         public VisualModel(
             List<Vertex3D> vertices,
             List<EdgesLineStrip> edges,
@@ -29,16 +30,43 @@ namespace OpenTkViewer.Models.VisualObjects
             verticesVectors = vertices.Select(x => x.Position).ToList();
 
             Edges = edges;
-            edgesVectors = edges
-                .SelectMany(x => x.Elements)
-                .Select(x => x.Position.Position)
-                .ToList();
+            edgesVectors = new List<Vector3d>();
+            Vector3d? previousPosition = null;
+            foreach (var edge in edges)
+            {
+                foreach (var edgeElement in edge.Elements)
+                {
+                    if (previousPosition != null)
+                    {
+                        edgesVectors.Add(previousPosition.Value);
+                        edgesVectors.Add(edgeElement.Position.Position);
+                    }
+
+                    previousPosition = edgeElement.Position.Position;
+                }
+
+                previousPosition = null;
+            }
 
             Triangles = triangles;
             trianglesVectors = triangles
                 .SelectMany(x => x.Vertices)
                 .Select(x => x.Position)
                 .ToList();
+
+            boundingBox = BoundingBox.CreateFromPoints(trianglesVectors);
+        }
+
+        public BoundingBox GetBoundingBox(Matrix4d? transformation)
+        {
+            if (transformation == null)
+                return boundingBox;
+
+            var transformedMin = 
+                Vector3d.TransformPosition(boundingBox.Min, transformation.Value);
+            var transformedMax =
+                Vector3d.TransformPosition(boundingBox.Max, transformation.Value);
+            return new BoundingBox(transformedMin, transformedMax);
         }
     }
 }

@@ -6,13 +6,26 @@ namespace OpenTkViewer.Models
 {
     public static class DrawHelper
     {
-        public static void InitializeScene()
+        public static void InitializeViewport(int width, int height)
+        {
+            GL.Viewport(0, 0, width, height);
+        }
+
+        public static void InitializeScene(Camera camera)
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             GL.ClearColor(Color.Azure);
 
             GL.DepthFunc(DepthFunction.Lequal);
             GL.Enable(EnableCap.DepthTest);
+
+            GL.MatrixMode(MatrixMode.Projection);
+            var projectionMatrix = camera.ProjectionMatrix;
+            GL.LoadMatrix(ref projectionMatrix);
+
+            GL.MatrixMode(MatrixMode.Modelview);
+            var modelViewMatrix = camera.ModelViewMatrix;
+            GL.LoadMatrix(ref modelViewMatrix);
         }
 
         public static void DrawOnScene(this IVisualObject visualObject)

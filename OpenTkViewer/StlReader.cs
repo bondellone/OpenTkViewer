@@ -11,8 +11,14 @@ namespace OpenTkViewer
 {
     public class StlReader
     {
-        private static NumberStyles style = NumberStyles.AllowDecimalPoint | NumberStyles.AllowExponent | NumberStyles.AllowLeadingSign;
-        private static CultureInfo culture = CultureInfo.InvariantCulture;
+        private static readonly NumberStyles Style;
+        private static readonly CultureInfo Culture;
+
+        static StlReader()
+        {
+            Style = NumberStyles.AllowDecimalPoint | NumberStyles.AllowExponent | NumberStyles.AllowLeadingSign;
+            Culture = CultureInfo.InvariantCulture;
+        }
 
         public static VisualModel Load(string fileName)
         {
@@ -132,27 +138,22 @@ namespace OpenTkViewer
         private static Vector3d Convert(string line, string parameterName)
         {
             Vector3d vector0;
-            int currentPosition = parameterName.Length;
-            string number = GetNumber(line, ref currentPosition);
-            double.TryParse(number, style, culture, out vector0.X);
-
+            var currentPosition = parameterName.Length;
+            var number = GetNumber(line, ref currentPosition);
+            double.TryParse(number, Style, Culture, out vector0.X);
             number = GetNumber(line, ref currentPosition);
-            double.TryParse(number, style, culture, out vector0.Y);
-
+            double.TryParse(number, Style, Culture, out vector0.Y);
             number = GetNumber(line, ref currentPosition);
-            double.TryParse(number, style, culture, out vector0.Z);
-
+            double.TryParse(number, Style, Culture, out vector0.Z);
             return vector0;
         }
 
         private static string GetNumber(string line, ref int currentPosition)
         {
             while (line[currentPosition] == ' ')
-            {
                 currentPosition++;
-            }
 
-            int numberLength = 0;
+            var numberLength = 0;
             while (currentPosition < line.Length && line[currentPosition] != ' ')
             {
                 currentPosition++;

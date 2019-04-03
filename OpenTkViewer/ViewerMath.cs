@@ -13,9 +13,9 @@ namespace OpenTkViewer
 
         public static Matrix4d CreateRotation(Vector3d axis, double angle)
         {
-            double cos = Math.Cos(angle);
-            double sin = Math.Sin(angle);
-            double t = 1.0 - cos;
+            var cos = Math.Cos(angle);
+            var sin = Math.Sin(angle);
+            var t = 1.0 - cos;
 
             axis.Normalize();
 

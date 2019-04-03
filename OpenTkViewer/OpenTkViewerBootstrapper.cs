@@ -20,7 +20,9 @@ namespace OpenTkViewer
         {
             container = new SimpleContainer();
             container.Singleton<IWindowManager, WindowManager>();
+            
             container.Singleton<Camera>();
+            container.Singleton<CameraManipulator>();
             container.Singleton<OpenTkControl>();
             container.Singleton<ViewerScene>();
             container.Singleton<SceneViewModel>();

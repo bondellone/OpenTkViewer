@@ -72,8 +72,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CameraManipulator.cs" />
     <Compile Include="Interfaces\IVisualObject.cs" />
     <Compile Include="Models\DrawHelper.cs" />
+    <Compile Include="Models\BoundingBox.cs" />
     <Compile Include="Models\ModelPrimitives\Edge3D.cs" />
     <Compile Include="Models\EdgeNormal.cs" />
     <Compile Include="Models\EdgesLineStrip.cs" />
