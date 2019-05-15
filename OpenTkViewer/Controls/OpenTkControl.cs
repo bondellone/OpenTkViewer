@@ -26,5 +26,10 @@ namespace OpenTkViewer.Controls
             HorizontalAlignment = HorizontalAlignment.Stretch;
             VerticalAlignment = VerticalAlignment.Stretch;
         }
+
+        public void Update()
+        {
+            GlControl.Invalidate();
+        }
     }
 }

@@ -11,6 +11,8 @@ namespace OpenTkViewer.Models
         public readonly Vector3d Min;
         public readonly Vector3d Max;
 
+        public Vector3d Center => (Max - Min) / 2 + Min;
+
         public BoundingBox(Vector3d min, Vector3d max)
         {
             Min = min;
@@ -163,8 +165,8 @@ namespace OpenTkViewer.Models
             var vector1 = new Vector3d(double.MinValue);
             foreach (var vector3 in points)
             {
-                vector2 = Vector3d.MagnitudeMin(vector2, vector3);
-                vector1 = Vector3d.MagnitudeMax(vector1, vector3);
+                vector2 = Vector3d.ComponentMin(vector2, vector3);
+                vector1 = Vector3d.ComponentMax(vector1, vector3);
                 empty = false;
             }
 

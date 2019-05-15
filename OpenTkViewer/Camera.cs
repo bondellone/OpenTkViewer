@@ -48,6 +48,7 @@ namespace OpenTkViewer
             set
             {
                 var prev = GetTransform4X4();
+                value.Invert();
                 rotationCenterMatrix = value;
                 var cur = GetTransform4X4();
                 var offset = new Vector3d(

@@ -20,7 +20,9 @@ namespace OpenTkViewer.Models.VisualObjects
         public IEnumerable<Vector3d> VerticesVectors => verticesVectors;
         public IEnumerable<Vector3d> EdgesVectors => edgesVectors;
         public IEnumerable<Vector3d> TrianglesVectors => trianglesVectors;
-        
+
+        public Matrix4d Transformation { get; set; }
+
         public VisualModel(
             List<Vertex3D> vertices,
             List<EdgesLineStrip> edges,
@@ -57,15 +59,13 @@ namespace OpenTkViewer.Models.VisualObjects
             boundingBox = BoundingBox.CreateFromPoints(trianglesVectors);
         }
 
-        public BoundingBox GetBoundingBox(Matrix4d? transformation)
+        public BoundingBox GetBoundingBox(Matrix4d? transformation = null)
         {
-            if (transformation == null)
-                return boundingBox;
-
+            var resultTransformation = transformation ?? Matrix4d.Identity;
             var transformedMin = 
-                Vector3d.TransformPosition(boundingBox.Min, transformation.Value);
+                Vector3d.TransformPosition(boundingBox.Min, resultTransformation);
             var transformedMax =
-                Vector3d.TransformPosition(boundingBox.Max, transformation.Value);
+                Vector3d.TransformPosition(boundingBox.Max, resultTransformation);
             return new BoundingBox(transformedMin, transformedMax);
         }
     }

@@ -2,6 +2,7 @@
 using System.Linq;
 using OpenTkViewer.Interfaces;
 using OpenTkViewer.Models;
+using OpenTK;
 
 namespace OpenTkViewer
 {
@@ -26,6 +27,20 @@ namespace OpenTkViewer
         {
             foreach (var visualObject in visualObjects)
                 visualObject.DrawOnScene();
+        }
+
+        public Vector3d GetRotationCenter()
+        {
+            BoundingBox? result = null;
+            foreach (var visualObject in visualObjects)
+            {
+                var visualObjectBb = visualObject.GetBoundingBox();
+                result = result.HasValue 
+                    ? BoundingBox.CreateMerged(result.Value, visualObjectBb) 
+                    : visualObjectBb;
+            }
+
+            return result?.Center ?? Vector3d.Zero;
         }
     }
 }

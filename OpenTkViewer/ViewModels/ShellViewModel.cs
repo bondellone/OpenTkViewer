@@ -1,10 +1,14 @@
 ﻿using Caliburn.Micro;
 using Microsoft.Win32;
+using OpenTkViewer.Controls;
+using OpenTK;
 
 namespace OpenTkViewer.ViewModels
 {
     public class ShellViewModel : Screen
     {
+        private readonly Camera camera;
+        private readonly OpenTkControl openTkControl;
         private readonly ViewerScene viewerScene;
 
         private string displayName;
@@ -20,10 +24,16 @@ namespace OpenTkViewer.ViewModels
         }
 
         public SceneViewModel SceneViewModel { get; set; }
-        
 
-        public ShellViewModel(ViewerScene viewerScene, SceneViewModel sceneViewModel)
+
+        public ShellViewModel(
+            Camera camera,
+            OpenTkControl openTkControl,
+            ViewerScene viewerScene,
+            SceneViewModel sceneViewModel)
         {
+            this.camera = camera;
+            this.openTkControl = openTkControl;
             this.viewerScene = viewerScene;
             SceneViewModel = sceneViewModel;
         }
@@ -45,6 +55,11 @@ namespace OpenTkViewer.ViewModels
                     viewerScene.Add(model);
                 }
             }
+
+            var rotationCenter = viewerScene.GetRotationCenter();
+            var rotationCenterMatrix = Matrix4d.CreateTranslation(rotationCenter);
+            camera.RotationCenterMatrix = rotationCenterMatrix;
+            openTkControl.Update();
         }
     }
 }
