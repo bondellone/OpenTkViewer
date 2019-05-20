@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using OpenTkViewer.Interfaces;
+using OpenTkViewer.Models.Enums;
 using OpenTkViewer.Models.ModelPrimitives;
 using OpenTK;
 
@@ -45,6 +46,12 @@ namespace OpenTkViewer.Models.VisualObjects
                     }
 
                     previousPosition = edgeElement.Position.Position;
+                }
+
+                if (edge.Type == ContourType.Closed)
+                {
+                    edgesVectors.Add(edge.End.Position);
+                    edgesVectors.Add(edge.Start.Position);
                 }
 
                 previousPosition = null;

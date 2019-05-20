@@ -29,7 +29,7 @@ namespace OpenTkViewer
                 visualObject.DrawOnScene();
         }
 
-        public Vector3d GetRotationCenter()
+        public BoundingBox? GetSceneBoundingBox()
         {
             BoundingBox? result = null;
             foreach (var visualObject in visualObjects)
@@ -40,7 +40,7 @@ namespace OpenTkViewer
                     : visualObjectBb;
             }
 
-            return result?.Center ?? Vector3d.Zero;
+            return result;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using OpenTkViewer.Models;
 using OpenTK;
 
 namespace OpenTkViewer
@@ -124,12 +125,30 @@ namespace OpenTkViewer
             OnTransformChanged();
         }
 
-        //public void Reset()
-        //{
-        //    rotationCenterMatrix = Matrix4d.Identity;
-        //    rotationMatrix = Matrix4d.Identity;
-        //    translationMatrix = Matrix4d.Identity;
-        //}
+        public void Update(BoundingBox boundingBox)
+        {
+            RotationCenterMatrix = Matrix4d.CreateTranslation(boundingBox.Center);
+            Translate(-boundingBox.Center);
+            var delta = boundingBox.Max - boundingBox.Min;
+            var maxXy = delta.X > delta.Y ? delta.X : delta.Y;
+            var maxXyz = maxXy > delta.Z ? maxXy : delta.Z;
+            var translation = new Vector3d(0, 0, -(maxXyz * 2));
+            var rotationAxis = (Vector3d.UnitX + -Vector3d.UnitY).GetNormal();
+            Rotate(Quaterniond.FromAxisAngle(rotationAxis, DegreeToRadians(60)));
+            Translate(translation);
+        }
+
+        private double DegreeToRadians(double degree)
+        {
+            return degree * Math.PI / 180;
+        }
+
+        public void Reset()
+        {
+            rotationCenterMatrix = Matrix4d.Identity;
+            rotationMatrix = Matrix4d.Identity;
+            translationMatrix = Matrix4d.Identity;
+        }
 
         //public double GetWorldUnitsPerScreenPixelAtPosition(Vector3 worldPosition, double maxRatio = 5)
         //{

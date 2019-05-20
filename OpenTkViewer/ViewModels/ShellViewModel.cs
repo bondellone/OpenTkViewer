@@ -1,4 +1,5 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using Caliburn.Micro;
 using Microsoft.Win32;
 using OpenTkViewer.Controls;
 using OpenTK;
@@ -56,9 +57,12 @@ namespace OpenTkViewer.ViewModels
                 }
             }
 
-            var rotationCenter = viewerScene.GetRotationCenter();
-            var rotationCenterMatrix = Matrix4d.CreateTranslation(rotationCenter);
-            camera.RotationCenterMatrix = rotationCenterMatrix;
+            var sceneBoundingBox = viewerScene.GetSceneBoundingBox();
+            if (sceneBoundingBox.HasValue)
+                camera.Update(sceneBoundingBox.Value);
+            else
+                camera.Reset();
+
             openTkControl.Update();
         }
     }

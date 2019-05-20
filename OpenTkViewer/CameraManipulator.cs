@@ -88,7 +88,7 @@ namespace OpenTkViewer
             var positionAboutY = Vector3d.Transform(Vector3d.UnitZ, Matrix4d.CreateRotationY(lengthOnSurfaceRadi));
 
             // get the angle that this distance travels around the sphere
-            var angleToTravel = Math.Atan2(deltaOnSurface.Y, deltaOnSurface.X);
+            var angleToTravel = Math.Atan2(-deltaOnSurface.Y, deltaOnSurface.X);
 
             // now rotate that position about z in the direction of the screen vector
             return Vector3d.Transform(positionAboutY, Matrix4d.CreateRotationZ(angleToTravel));

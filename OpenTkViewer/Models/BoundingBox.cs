@@ -11,7 +11,7 @@ namespace OpenTkViewer.Models
         public readonly Vector3d Min;
         public readonly Vector3d Max;
 
-        public Vector3d Center => (Max - Min) / 2 + Min;
+        public Vector3d Center => (Max + Min) / 2;
 
         public BoundingBox(Vector3d min, Vector3d max)
         {
