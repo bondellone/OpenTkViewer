@@ -2,7 +2,6 @@
 using System.Linq;
 using OpenTkViewer.Interfaces;
 using OpenTkViewer.Models;
-using OpenTK;
 
 namespace OpenTkViewer
 {

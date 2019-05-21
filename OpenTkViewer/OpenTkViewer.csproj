@@ -77,7 +77,6 @@
     <Compile Include="Models\DrawHelper.cs" />
     <Compile Include="Models\BoundingBox.cs" />
     <Compile Include="Models\ModelPrimitives\Edge3D.cs" />
-    <Compile Include="Models\EdgeNormal.cs" />
     <Compile Include="Models\EdgesLineStrip.cs" />
     <Compile Include="Models\Enums\ContourType.cs" />
     <Compile Include="Models\ModelPrimitives\Face3D.cs" />

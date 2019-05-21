@@ -133,14 +133,9 @@ namespace OpenTkViewer
             var maxXy = delta.X > delta.Y ? delta.X : delta.Y;
             var maxXyz = maxXy > delta.Z ? maxXy : delta.Z;
             var translation = new Vector3d(0, 0, -(maxXyz * 2));
-            var rotationAxis = (Vector3d.UnitX + -Vector3d.UnitY).GetNormal();
-            Rotate(Quaterniond.FromAxisAngle(rotationAxis, DegreeToRadians(60)));
+            var rotationAxis = (Vector3d.UnitX - Vector3d.UnitY).GetNormal();
+            Rotate(Quaterniond.FromAxisAngle(rotationAxis, MathHelper.DegreesToRadians(60)));
             Translate(translation);
-        }
-
-        private double DegreeToRadians(double degree)
-        {
-            return degree * Math.PI / 180;
         }
 
         public void Reset()
