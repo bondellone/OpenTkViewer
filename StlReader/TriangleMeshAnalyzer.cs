@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using OpenTkViewer.Models.Enums;
-using OpenTkViewer.Models.ModelPrimitives;
+using Infrastructure;
+using Infrastructure.ModelPrimitives;
+using Infrastructure.Models;
+using Infrastructure.Models.Enums;
 using OpenTK;
 
-namespace OpenTkViewer.Models
+namespace StlReader
 {
     public class TriangleMeshAnalyzer
     {

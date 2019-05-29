@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace OpenTkViewer.Models.ModelPrimitives
+namespace Infrastructure.ModelPrimitives
 {
     public class Edge3D
     {

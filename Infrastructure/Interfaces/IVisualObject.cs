@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using OpenTkViewer.Models;
+using Infrastructure.Models;
 using OpenTK;
 
-namespace OpenTkViewer.Interfaces
+namespace Infrastructure.Interfaces
 {
     public interface IVisualObject
     {

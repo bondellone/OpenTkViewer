@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace OpenTkViewer.Models
+namespace Infrastructure.Models
 {
     public class LineStripElement<T, TK>
     {

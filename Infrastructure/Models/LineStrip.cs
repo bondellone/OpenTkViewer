@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using OpenTkViewer.Models.Enums;
+using Infrastructure.Models.Enums;
 
-namespace OpenTkViewer.Models
+namespace Infrastructure.Models
 {
     public abstract class LineStrip<T, TK> where TK : class
     {

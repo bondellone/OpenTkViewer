@@ -1,26 +1,34 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using OpenTkViewer.Models;
-using OpenTkViewer.Models.VisualObjects;
+using Infrastructure;
+using Infrastructure.Interfaces;
+using Infrastructure.VisualObjects;
 using OpenTK;
 
-namespace OpenTkViewer
+namespace StlReader
 {
-    public class StlReader
+    public class Reader : IFileReader
     {
-        private static readonly NumberStyles Style;
-        private static readonly CultureInfo Culture;
+        private readonly NumberStyles style;
+        private readonly CultureInfo culture;
 
-        static StlReader()
+        public string Name { get; }
+        public IEnumerable<string> SupportedFormats { get; }
+
+        public Reader()
         {
-            Style = NumberStyles.AllowDecimalPoint | NumberStyles.AllowExponent | NumberStyles.AllowLeadingSign;
-            Culture = CultureInfo.InvariantCulture;
+            style = NumberStyles.AllowDecimalPoint | NumberStyles.AllowExponent | NumberStyles.AllowLeadingSign;
+            culture = CultureInfo.InvariantCulture;
+
+            Name = "STL";
+            SupportedFormats = new[] {".stl"};
         }
 
-        public static VisualModel Load(string fileName)
+        public VisualModel Load(string fileName)
         {
             var triangleMesh = new TriangleMesh();
             using (Stream fileStream = File.OpenRead(fileName))
@@ -36,7 +44,7 @@ namespace OpenTkViewer
                 triangleMeshAnalyzer.Triangles);
         }
 
-        private static void ParseFileContents(Stream stlStream, ref TriangleMesh triangleMesh)
+        private void ParseFileContents(Stream stlStream, ref TriangleMesh triangleMesh)
         {
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
             if (stlStream == null)
@@ -62,6 +70,7 @@ namespace OpenTkViewer
                 var normal = Vector3d.Zero;
                 var vector0 = Vector3d.Zero;
                 var vector1 = Vector3d.Zero;
+                // ReSharper disable once RedundantAssignment
                 var vector2 = Vector3d.Zero;
                 var line = stlReader.ReadLine();
 
@@ -135,20 +144,20 @@ namespace OpenTkViewer
             stlStream.Close();
         }
 
-        private static Vector3d Convert(string line, string parameterName)
+        private Vector3d Convert(string line, string parameterName)
         {
             Vector3d vector0;
             var currentPosition = parameterName.Length;
             var number = GetNumber(line, ref currentPosition);
-            double.TryParse(number, Style, Culture, out vector0.X);
+            double.TryParse(number, style, culture, out vector0.X);
             number = GetNumber(line, ref currentPosition);
-            double.TryParse(number, Style, Culture, out vector0.Y);
+            double.TryParse(number, style, culture, out vector0.Y);
             number = GetNumber(line, ref currentPosition);
-            double.TryParse(number, Style, Culture, out vector0.Z);
+            double.TryParse(number, style, culture, out vector0.Z);
             return vector0;
         }
 
-        private static string GetNumber(string line, ref int currentPosition)
+        private string GetNumber(string line, ref int currentPosition)
         {
             while (line[currentPosition] == ' ')
                 currentPosition++;

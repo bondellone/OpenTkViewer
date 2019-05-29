@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.28701.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTkViewer", "OpenTkViewer\OpenTkViewer.csproj", "{146B65FA-F8A6-44C2-90DA-6B961E37EA18}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{9DE7FBBB-E660-4239-9580-C2697FED8395}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StlReader", "StlReader\StlReader.csproj", "{176527C5-C53A-4851-97D0-0BC564ABAD78}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{146B65FA-F8A6-44C2-90DA-6B961E37EA18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{146B65FA-F8A6-44C2-90DA-6B961E37EA18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{146B65FA-F8A6-44C2-90DA-6B961E37EA18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DE7FBBB-E660-4239-9580-C2697FED8395}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DE7FBBB-E660-4239-9580-C2697FED8395}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DE7FBBB-E660-4239-9580-C2697FED8395}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DE7FBBB-E660-4239-9580-C2697FED8395}.Release|Any CPU.Build.0 = Release|Any CPU
+		{176527C5-C53A-4851-97D0-0BC564ABAD78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{176527C5-C53A-4851-97D0-0BC564ABAD78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{176527C5-C53A-4851-97D0-0BC564ABAD78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{176527C5-C53A-4851-97D0-0BC564ABAD78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

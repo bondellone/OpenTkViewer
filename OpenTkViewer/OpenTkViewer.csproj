@@ -73,23 +73,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CameraManipulator.cs" />
-    <Compile Include="Interfaces\IVisualObject.cs" />
     <Compile Include="Models\DrawHelper.cs" />
-    <Compile Include="Models\BoundingBox.cs" />
-    <Compile Include="Models\ModelPrimitives\Edge3D.cs" />
-    <Compile Include="Models\EdgesLineStrip.cs" />
-    <Compile Include="Models\Enums\ContourType.cs" />
-    <Compile Include="Models\ModelPrimitives\Face3D.cs" />
-    <Compile Include="Models\LineStrip.cs" />
-    <Compile Include="Models\LineStripElement.cs" />
-    <Compile Include="Models\ModelPrimitives\Triangle3D.cs" />
-    <Compile Include="Models\TriangleMeshAnalyzer.cs" />
-    <Compile Include="Models\ModelPrimitives\Vertex3D.cs" />
-    <Compile Include="Models\ModelPrimitives\VertexStorage.cs" />
-    <Compile Include="Models\VisualObjects\VisualModel.cs" />
+    <Compile Include="Models\FileManager.cs" />
     <Compile Include="OpenTkViewerBootstrapper.cs" />
-    <Compile Include="StlReader.cs" />
-    <Compile Include="Models\TriangleMesh.cs" />
     <Compile Include="ViewerScene.cs" />
     <Compile Include="ViewModels\SceneViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
@@ -114,7 +100,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ViewerMath.cs" />
     <Compile Include="Controls\OpenTkControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -142,6 +127,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{9de7fbbb-e660-4239-9580-c2697fed8395}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StlReader\StlReader.csproj">
+      <Project>{176527c5-c53a-4851-97d0-0bc564abad78}</Project>
+      <Name>StlReader</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

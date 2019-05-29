@@ -1,8 +1,6 @@
-﻿using System;
-using Caliburn.Micro;
-using Microsoft.Win32;
+﻿using Caliburn.Micro;
 using OpenTkViewer.Controls;
-using OpenTK;
+using OpenTkViewer.Models;
 
 namespace OpenTkViewer.ViewModels
 {
@@ -11,6 +9,7 @@ namespace OpenTkViewer.ViewModels
         private readonly Camera camera;
         private readonly OpenTkControl openTkControl;
         private readonly ViewerScene viewerScene;
+        private readonly FileManager fileManager;
 
         private string displayName;
 
@@ -26,37 +25,23 @@ namespace OpenTkViewer.ViewModels
 
         public SceneViewModel SceneViewModel { get; set; }
 
-
         public ShellViewModel(
             Camera camera,
             OpenTkControl openTkControl,
             ViewerScene viewerScene,
+            FileManager fileManager,
             SceneViewModel sceneViewModel)
         {
             this.camera = camera;
             this.openTkControl = openTkControl;
             this.viewerScene = viewerScene;
+            this.fileManager = fileManager;
             SceneViewModel = sceneViewModel;
         }
 
         public void OpenFile()
         {
-            var openFileDialog = new OpenFileDialog
-            {
-                DefaultExt = ".stl",
-                Filter = "(.stl)|*.stl"
-            };
-
-            var dialogResult = openFileDialog.ShowDialog();
-            if (dialogResult.HasValue && dialogResult.Value)
-            {
-                foreach (var fileName in openFileDialog.FileNames)
-                {
-                    var model = StlReader.Load(fileName);
-                    viewerScene.Add(model);
-                }
-            }
-
+            fileManager.OpenFile();
             var sceneBoundingBox = viewerScene.GetSceneBoundingBox();
             if (sceneBoundingBox.HasValue)
                 camera.Update(sceneBoundingBox.Value);

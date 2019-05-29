@@ -1,4 +1,4 @@
 *.vs
 *packages/
-*OpenTkViewer/bin/
-*OpenTkViewer/obj/
+*bin/
+*obj/

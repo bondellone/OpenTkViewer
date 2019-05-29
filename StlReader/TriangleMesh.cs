@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using OpenTkViewer.Models.ModelPrimitives;
+using Infrastructure.ModelPrimitives;
 using OpenTK;
 
-namespace OpenTkViewer.Models
+namespace StlReader
 {
     public class TriangleMesh
     {

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using OpenTkViewer.Interfaces;
+using Infrastructure.Interfaces;
+using Infrastructure.Models;
 using OpenTkViewer.Models;
 
 namespace OpenTkViewer

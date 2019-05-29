@@ -1,4 +1,4 @@
-﻿namespace OpenTkViewer.Models.Enums
+﻿namespace Infrastructure.Models.Enums
 {
     public enum ContourType
     {

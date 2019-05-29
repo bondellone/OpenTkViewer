@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using OpenTkViewer.Interfaces;
-using OpenTkViewer.Models.Enums;
-using OpenTkViewer.Models.ModelPrimitives;
+using Infrastructure.Interfaces;
+using Infrastructure.ModelPrimitives;
+using Infrastructure.Models;
+using Infrastructure.Models.Enums;
 using OpenTK;
 
-namespace OpenTkViewer.Models.VisualObjects
+namespace Infrastructure.VisualObjects
 {
     public class VisualModel : IVisualObject
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using OpenTK;
 
-namespace OpenTkViewer.Models.ModelPrimitives
+namespace Infrastructure.ModelPrimitives
 {
     public class Vertex3D
     {

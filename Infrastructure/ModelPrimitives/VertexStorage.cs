@@ -2,7 +2,7 @@
 using System.Linq;
 using OpenTK;
 
-namespace OpenTkViewer.Models.ModelPrimitives
+namespace Infrastructure.ModelPrimitives
 {
     public class VertexStorage
     {

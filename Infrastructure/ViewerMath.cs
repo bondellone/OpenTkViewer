@@ -1,7 +1,7 @@
 ﻿using System;
 using OpenTK;
 
-namespace OpenTkViewer
+namespace Infrastructure
 {
     public static class ViewerMath
     {

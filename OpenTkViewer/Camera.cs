@@ -1,4 +1,6 @@
 ﻿using System;
+using Infrastructure;
+using Infrastructure.Models;
 using OpenTkViewer.Models;
 using OpenTK;
 

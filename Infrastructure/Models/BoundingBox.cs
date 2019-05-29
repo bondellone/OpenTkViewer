@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using OpenTK;
 
-namespace OpenTkViewer.Models
+namespace Infrastructure.Models
 {
     public struct BoundingBox : IEquatable<BoundingBox>
     {

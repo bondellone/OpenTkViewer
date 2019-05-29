@@ -3,30 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenTK;
 
-namespace OpenTkViewer.Models.ModelPrimitives
+namespace Infrastructure.ModelPrimitives
 {
     public class Face3D
     {
         //private readonly SortedDictionary<int, Outline> outlines;
-        private bool isNewTrianglesAdded;
-        private List<Vertex3D> vertices;
+        //private bool isNewTrianglesAdded;
+        //private List<Vertex3D> vertices;
 
         public readonly List<Triangle3D> Triangles;
 
         public int Id { get; set; }
 
-        public List<Vertex3D> Vertices
-        {
-            get
-            {
-                if (!isNewTrianglesAdded && vertices != null)
-                    return vertices;
+        //public List<Vertex3D> Vertices
+        //{
+        //    get
+        //    {
+        //        //if (!isNewTrianglesAdded && vertices != null)
+        //        //    return vertices;
 
-                //CalculateOutlines();
-                //vertices = outlines.Values.SelectMany(x => x.Elements.Select(y => y.Position)).ToList();
-                return vertices;
-            }
-        }
+        //        //CalculateOutlines();
+        //        //vertices = outlines.Values.SelectMany(x => x.Elements.Select(y => y.Position)).ToList();
+        //        //return vertices;
+        //    }
+        //}
 
         //public IEnumerable<Outline> Outlines
         //{
@@ -51,7 +51,7 @@ namespace OpenTkViewer.Models.ModelPrimitives
         {
             Triangles.Add(triangle);
             triangle.SourceFace = this;
-            isNewTrianglesAdded = true;
+            //isNewTrianglesAdded = true;
         }
 
         public void Add(Face3D face)
@@ -65,7 +65,7 @@ namespace OpenTkViewer.Models.ModelPrimitives
                 faceTriangle.SourceFace = this;
             }
 
-            isNewTrianglesAdded = true;
+            //isNewTrianglesAdded = true;
         }
 
         public void Merge(Face3D face)
@@ -76,7 +76,7 @@ namespace OpenTkViewer.Models.ModelPrimitives
             foreach (var faceTriangle in face.Triangles)
                 Triangles.Add(faceTriangle);
 
-            isNewTrianglesAdded = true;
+            //isNewTrianglesAdded = true;
         }
 
         //public Outline GetOutline(int outlineId)

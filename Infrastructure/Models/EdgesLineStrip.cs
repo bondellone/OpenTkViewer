@@ -1,6 +1,6 @@
-﻿using OpenTkViewer.Models.ModelPrimitives;
+﻿using Infrastructure.ModelPrimitives;
 
-namespace OpenTkViewer.Models
+namespace Infrastructure.Models
 {
     public class EdgesLineStrip : LineStrip<Vertex3D, Edge3D>
     {
